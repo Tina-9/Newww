@@ -77,3 +77,13 @@
 8	59	1764879075344797956	/Users/NYC_Life/Newww/build/Qt_6_5_11_for_macOS-Debug/Newww_autogen/mocs_compilation.cpp	9229445ec9c71fea
 60	929	1764879075396241928	CMakeFiles/Newww.dir/mainwindowview.cpp.o	f0c84f678c30f492
 929	1054	1764879076266152101	Newww.app/Contents/MacOS/Newww	c52780f676cf80f
+16	521	1764883172536468000	Newww_autogen/timestamp	9229445ec9c71fea
+16	521	1764883172536468000	Newww_autogen/mocs_compilation.cpp	9229445ec9c71fea
+16	521	1764883172536468000	/Users/NYC_Life/Newww/build/Qt_6_5_11_for_macOS-Debug/Newww_autogen/timestamp	9229445ec9c71fea
+16	521	1764883172536468000	/Users/NYC_Life/Newww/build/Qt_6_5_11_for_macOS-Debug/Newww_autogen/mocs_compilation.cpp	9229445ec9c71fea
+522	2094	1764883172557913891	CMakeFiles/Newww.dir/userauth.cpp.o	797d9dc2af802de3
+522	2201	1764883172557413319	CMakeFiles/Newww.dir/main.cpp.o	72c4999bd001210b
+523	2273	1764883172558616999	CMakeFiles/Newww.dir/logindialog.cpp.o	65ae90c2942c027f
+521	2536	1764883172556628713	CMakeFiles/Newww.dir/Newww_autogen/mocs_compilation.cpp.o	ebace1cb78a96c2d
+522	2614	1764883172557707646	CMakeFiles/Newww.dir/mainwindow.cpp.o	d99372f614d32431
+2614	2749	1764883174649341712	Newww.app/Contents/MacOS/Newww	c52780f676cf80f

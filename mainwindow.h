@@ -26,7 +26,6 @@ private slots:
     void onLoginClicked();
     void onLogoutClicked();
     void onLoginSuccess(const QString &username);
-
 private:
     void loadData();
     void setLoggedIn(bool loggedIn);
@@ -39,6 +38,7 @@ private:
 
     bool               m_loggedIn;
     QString            m_currentUser;
+
 };
 
 #endif // MAINWINDOW_H

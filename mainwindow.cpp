@@ -139,6 +139,7 @@ void MainWindow::onCourseChanged(const QString &courseCode)
         return;
 
     updateCourseDisplay(courseCode);
+    test;
 }
 
 void MainWindow::updateCourseDisplay(const QString &courseCode)

@@ -1,0 +1,79 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-0fe91f95864ee2aace18.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "Newww",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "Newww::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Newww-Debug-a78d56aa511e82e434de.json",
+					"name" : "Newww",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Newww_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Newww_autogen-Debug-ba3b0ef990b81575befc.json",
+					"name" : "Newww_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Newww_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Newww_autogen_timestamp_deps-Debug-a30c3c6daffe1bd88815.json",
+					"name" : "Newww_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/Users/NYC_Life/Newww/build/Qt_6_5_11_for_macOS-Debug",
+		"source" : "/Users/NYC_Life/Newww"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}

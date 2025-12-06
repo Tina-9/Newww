@@ -1,6 +1,9 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "professordatabase.h"
+
+
 #include <QMainWindow>
 #include <QString>
 
@@ -30,6 +33,12 @@ private:
     void loadData();
     void setLoggedIn(bool loggedIn);
     void updateCourseDisplay(const QString &courseCode);
+    void showProfessorBook(int index);
+
+
+    int m_currentProfIndex = 0;
+    QVector<ProfessorInfo> m_currentProfList;
+
 
     MainWindowView    *ui;
     CourseDatabase    *m_courseDb;

@@ -40,6 +40,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->btnLogout, &QPushButton::clicked,this,&MainWindow::onLogoutClicked);
 
     setLoggedIn(false);
+
 }
 
 MainWindow::~MainWindow()
@@ -78,8 +79,8 @@ void MainWindow::setLoggedIn(bool loggedIn)
 
     if (!loggedIn)
     {
-        ui->courseLabel->setText("Course: -");
-        ui->isbnLabel->setText("ISBN: -");
+        ui->courseLabel->setText("Course: ");
+        ui->isbnLabel->setText("ISBN: ");
         ui->coverLabel->setText("No Cover");
         ui->coverLabel->setPixmap(QPixmap());
         ui->summaryEdit->clear();
@@ -146,6 +147,9 @@ void MainWindow::updateCourseDisplay(const QString &courseCode)
 
 
     QVector<ProfessorInfo> profs = m_profDb->professorsForCourse(courseCode);
+    m_currentProfList = profs;
+    m_currentProfIndex = 0;
+
 
     ui->profTable->setRowCount(0);
     QString summaryText;
@@ -170,6 +174,9 @@ void MainWindow::updateCourseDisplay(const QString &courseCode)
 
         if (i == 0)
             firstIsbn = p.isbn;
+        ui->titleLabel->setText("Title: " + p.bookTitle);
+        ui->authorLabel->setText("Author: " + p.author);
+
 
         if (!p.summary.isEmpty()) {
             summaryText += p.professorInfo + ":\n";
@@ -183,12 +190,12 @@ void MainWindow::updateCourseDisplay(const QString &courseCode)
     {
         ui->isbnLabel->setText("ISBN: " + firstIsbn);
 
-        QString imgPath = "covers/" + firstIsbn + ".jpg";
+        QString imgPath = "data/images/" + firstIsbn + ".jpg";
         QPixmap pix(imgPath);
 
         if (pix.isNull())
         {
-            imgPath = "covers/" + firstIsbn + ".png";
+            imgPath = "data/images/" + firstIsbn + ".png";
             pix.load(imgPath);
         }
 
@@ -204,7 +211,46 @@ void MainWindow::updateCourseDisplay(const QString &courseCode)
             ui->coverLabel->setPixmap(QPixmap());
         }
     }
+
+    ui->summaryEdit->setText(summaryText);
+    showProfessorBook(0);
+
+
 }
+
+void MainWindow::showProfessorBook(int index)
+{
+    if (m_currentProfList.isEmpty() || index < 0 || index >= m_currentProfList.size())
+        return;
+
+    ProfessorInfo p = m_currentProfList[index];
+
+    ui->titleLabel->setText("Title: " + p.bookTitle);
+    ui->authorLabel->setText("Author: " + p.author);
+    ui->isbnLabel->setText("ISBN: " + p.isbn);
+
+    QString imgPath = "data/images/" + p.isbn + ".jpg";
+    QPixmap pix(imgPath);
+    if (pix.isNull()) {
+        imgPath = "data/images/" + p.isbn + ".png";
+        pix.load(imgPath);
+    }
+
+    if (!pix.isNull()) {
+        ui->coverLabel->setPixmap(
+            pix.scaled(
+                ui->coverLabel->size(),
+                Qt::KeepAspectRatio,
+                Qt::SmoothTransformation
+                )
+            );
+        ui->coverLabel->setText("");
+    } else {
+        ui->coverLabel->setText("No Cover");
+        ui->coverLabel->setPixmap(QPixmap());
+    }
+}
+
 
 void MainWindow::onIsbnInputReturnPressed()
 {
@@ -237,6 +283,9 @@ void MainWindow::onIsbnInputReturnPressed()
         ui->courseBox->setCurrentIndex(courseIdx);
 
     updateCourseDisplay(cinfo.code);
+    if (!m_currentProfList.isEmpty())
+        showProfessorBook(0);
+
 }
 
 void MainWindow::onLoginClicked()

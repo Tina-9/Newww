@@ -78,29 +78,24 @@ MainWindowView::MainWindowView(QWidget *parent)
     courseLabel->setFont(f);
 
     isbnLabel = new QLabel("ISBN: ");
-
+    isbnLabel->setVisible(true);
+    titleLabel  = new QLabel("Title: ");
+    authorLabel = new QLabel("Author: ");
 
     auto *courseHeaderLayout = new QHBoxLayout;
     courseHeaderLayout->addWidget(courseLabel);
     courseHeaderLayout->addStretch();
     courseHeaderLayout->addWidget(isbnLabel);
 
-    coverLabel = new QLabel("No Cover");
-    coverLabel->setFixedSize(350, 220);
+
 
     QVBoxLayout *bookInfoLayout = new QVBoxLayout;
     bookInfoLayout->addWidget(titleLabel);
     bookInfoLayout->addWidget(authorLabel);
     bookInfoLayout->addStretch();
 
-    QLabel *titleLabel  = new QLabel("Title: ");
-    QLabel *authorLabel = new QLabel("Author: ");
-    QLabel *isbnLabel   = new QLabel("ISBN: ");
-    bookInfoLayout->addWidget(titleLabel);
-    bookInfoLayout->addWidget(authorLabel);
-    bookInfoLayout->addStretch();
-
-
+    coverLabel = new QLabel("No Cover");
+    coverLabel->setFixedSize(350, 220);
     coverLabel->setAlignment(Qt::AlignCenter);
     coverLabel->setStyleSheet("background:white; border:1px solid #CFAE3D;");
 
@@ -108,10 +103,13 @@ MainWindowView::MainWindowView(QWidget *parent)
     coverLayout->addWidget(coverLabel);
     coverLayout->addLayout(bookInfoLayout);
 
-
     // ========= 表格 =========
     profTable = new QTableWidget;
     profTable->setColumnCount(4);
+    profTable->verticalHeader()->setFixedWidth(25);
+    profTable->verticalHeader()->setDefaultAlignment(Qt::AlignCenter);
+    profTable->verticalHeader()->setStyleSheet("font-size: 10pt;");
+
     QStringList headers;
     headers << "Professor" << "Book Title" << "Author" << "All Courses";
     profTable->setHorizontalHeaderLabels(headers);

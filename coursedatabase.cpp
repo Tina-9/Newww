@@ -9,6 +9,15 @@ CourseDatabase::CourseDatabase(QObject *parent)
 {
 }
 
+static QString clean(QString s)
+{
+    s = s.trimmed();
+    s.replace("\"", "");
+    s.replace(QChar(0x201C), "");
+    s.replace(QChar(0x201D), "");
+    return s;
+}
+
 bool CourseDatabase::loadFromCsv(const QString &filePath)
 {
     QFile file(filePath);
@@ -28,10 +37,11 @@ bool CourseDatabase::loadFromCsv(const QString &filePath)
         if (p.size() < 4) continue;
 
         CourseInfo info;
-        info.major = p[0].trimmed();
-        info.year  = p[1].trimmed();
-        info.code  = p[2].trimmed();
-        info.name  = p[3].trimmed();
+        info.major = clean(p[0]);
+        info.year  = clean(p[1]);
+        info.code  = clean(p[2]);
+        info.name  = clean(p[3]);
+
 
         m_courses[info.code] = info;
     }

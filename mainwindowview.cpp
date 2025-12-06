@@ -10,18 +10,21 @@
 #include <QVBoxLayout>
 #include <QGridLayout>
 #include <QHeaderView>
+#include <QFile>
+#include <QDebug>
+
 
 MainWindowView::MainWindowView(QWidget *parent)
     : QWidget(parent)
 {
+    qDebug() << "BG exists?" << QFile::exists("data/images/background.png");
+
     setStyleSheet(
         "MainWindowView {"
-        "  background: qlineargradient("
-        "      x1:0, y1:0, x2:1, y2:1,"
-        "      stop:0 #F2DB7A,"
-        "      stop:1 #FFFFFF);"
+        "  background-color: #FFCCCC;"
         "}"
         );
+
 
     // top button
     btnLogin  = new QPushButton("Login");
@@ -50,7 +53,6 @@ MainWindowView::MainWindowView(QWidget *parent)
 
     QFrame *leftPanel = new QFrame;
     leftPanel->setStyleSheet("border: 2px solid #CFAE3D; border-radius: 6px;");
-
 
 
     auto *leftLayout = new QVBoxLayout;

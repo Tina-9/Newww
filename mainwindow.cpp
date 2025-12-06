@@ -49,7 +49,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::loadData()
 {
-    if (!m_courseDb->loadFromCsv("data/courses.csv"))
+    if (!m_courseDb->loadFromCsv("/Users/NYC_Life/Newww/build/Qt_6_5_11_for_macOS-Debug/Newww.app/Contents/MacOS/data/courses.csv"))
     {
         QMessageBox::warning(this, "Error", "Could not load courses.csv");
     }

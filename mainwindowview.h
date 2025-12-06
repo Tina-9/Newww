@@ -19,17 +19,21 @@ public:
     QPushButton *btnSignUp;
     QPushButton *btnLogout;
 
-    QLineEdit   *isbnInput;
-    QComboBox   *majorBox;
-    QComboBox   *yearBox;
-    QComboBox   *courseBox;
+    QLineEdit *isbnInput;
+    QComboBox *majorBox;
+    QComboBox *yearBox;
+    QComboBox *courseBox;
 
-    QLabel      *courseLabel;
-    QLabel      *isbnLabel;
-    QLabel      *coverLabel;
+    QLabel *courseLabel;
+    QLabel *isbnLabel;
+    QLabel *coverLabel;
+
+    QLabel *titleLabel;
+    QLabel *authorLabel;
+
 
     QTableWidget *profTable;
-    QTextEdit   *summaryEdit;
+    QTextEdit    *summaryEdit;
 };
 
 #endif

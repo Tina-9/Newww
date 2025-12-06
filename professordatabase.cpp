@@ -31,7 +31,8 @@ bool ProfessorDatabase::loadFromCsv(const QString &filePath)
         p.major         = parts[0];
         p.year          = parts[1];
         p.courseCode    = parts[2];
-        p.professorInfo = parts[3];
+        p.professorInfo = parts[3].trimmed();
+        p.professorInfo.remove("\"");
         p.bookTitle     = parts[4];
         p.author        = parts[5];
         p.isbn          = parts[6];
@@ -75,3 +76,5 @@ ProfessorInfo ProfessorDatabase::byIsbn(const QString &isbn) const
     }
     return ProfessorInfo{};
 }
+
+

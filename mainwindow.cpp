@@ -33,15 +33,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Connect signals
     connect(ui->majorBox,  &QComboBox::currentTextChanged,this,&MainWindow::onMajorChanged);
-
     connect(ui->yearBox,   &QComboBox::currentTextChanged,this,&MainWindow::onYearChanged);
-
     connect(ui->courseBox, &QComboBox::currentTextChanged,this,&MainWindow::onCourseChanged);
-
     connect(ui->isbnInput, &QLineEdit::returnPressed,this,&MainWindow::onIsbnInputReturnPressed);
-
     connect(ui->btnLogin,  &QPushButton::clicked,this,&MainWindow::onLoginClicked);
-
     connect(ui->btnLogout, &QPushButton::clicked,this,&MainWindow::onLogoutClicked);
 
     setLoggedIn(false);
@@ -78,7 +73,6 @@ void MainWindow::setLoggedIn(bool loggedIn)
     ui->yearBox->setEnabled(loggedIn);
     ui->courseBox->setEnabled(loggedIn);
     ui->isbnInput->setEnabled(loggedIn);
-
     ui->btnLogin->setEnabled(!loggedIn);
     ui->btnLogout->setEnabled(loggedIn);
 
@@ -139,7 +133,7 @@ void MainWindow::onCourseChanged(const QString &courseCode)
         return;
 
     updateCourseDisplay(courseCode);
-    test;
+
 }
 
 void MainWindow::updateCourseDisplay(const QString &courseCode)
@@ -150,8 +144,8 @@ void MainWindow::updateCourseDisplay(const QString &courseCode)
 
     ui->courseLabel->setText("Course: " + cinfo.code + " - " + cinfo.name);
 
-    QVector<ProfessorInfo> profs =
-        m_profDb->professorsForCourse(courseCode);
+
+    QVector<ProfessorInfo> profs = m_profDb->professorsForCourse(courseCode);
 
     ui->profTable->setRowCount(0);
     QString summaryText;
@@ -163,11 +157,16 @@ void MainWindow::updateCourseDisplay(const QString &courseCode)
     {
         const ProfessorInfo &p = profs[i];
         ui->profTable->insertRow(i);
-
         ui->profTable->setItem(i, 0, new QTableWidgetItem(p.professorInfo));
         ui->profTable->setItem(i, 1, new QTableWidgetItem(p.bookTitle));
         ui->profTable->setItem(i, 2, new QTableWidgetItem(p.author));
-        ui->profTable->setItem(i, 3, new QTableWidgetItem(p.isbn));
+
+
+        QStringList courses = m_profDb->allCoursesForProfessor(p.professorInfo);
+
+        QString courseStr = courses.join(", ");
+        ui->profTable->setItem(i, 3, new QTableWidgetItem(courseStr));
+
 
         if (i == 0)
             firstIsbn = p.isbn;
@@ -195,11 +194,11 @@ void MainWindow::updateCourseDisplay(const QString &courseCode)
 
         if (!pix.isNull())
         {
-            ui->coverLabel->setPixmap(
-                pix.scaled(ui->coverLabel->size(),
-                           Qt::KeepAspectRatio,
-                           Qt::SmoothTransformation));
+            ui->coverLabel->setPixmap(pix.scaled(ui->coverLabel->size(),
+            Qt::KeepAspectRatio,
+            Qt::SmoothTransformation));
             ui->coverLabel->setText("");
+
         } else {
             ui->coverLabel->setText("No Cover");
             ui->coverLabel->setPixmap(QPixmap());
@@ -217,8 +216,7 @@ void MainWindow::onIsbnInputReturnPressed()
 
     if (pinfo.courseCode.isEmpty())
     {
-        QMessageBox::information(this, "Not Found",
-                                 "No professor/book found for this ISBN.");
+        QMessageBox::information(this, "Not Found","No professor/book found for this ISBN.");
         return;
     }
 
@@ -244,8 +242,7 @@ void MainWindow::onIsbnInputReturnPressed()
 void MainWindow::onLoginClicked()
 {
     LoginDialog dlg(m_auth, this);
-    connect(&dlg, &LoginDialog::loginSuccess,
-            this,  &MainWindow::onLoginSuccess);
+    connect(&dlg, &LoginDialog::loginSuccess,this,  &MainWindow::onLoginSuccess);
 
     dlg.exec();
 }
@@ -255,8 +252,7 @@ void MainWindow::onLoginSuccess(const QString &username)
     m_currentUser = username;
     setLoggedIn(true);
 
-    QMessageBox::information(this, "Welcome",
-                             "Welcome, " + username + "!");
+    QMessageBox::information(this, "Welcome","Welcome, " + username + "!");
 }
 
 void MainWindow::onLogoutClicked()
@@ -267,6 +263,5 @@ void MainWindow::onLogoutClicked()
     m_currentUser.clear();
     setLoggedIn(false);
 
-    QMessageBox::information(this, "Logout",
-                             "You have logged out.");
+    QMessageBox::information(this, "Logout","You have logged out.");
 }

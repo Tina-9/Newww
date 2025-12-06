@@ -175,14 +175,33 @@ void MainWindow::updateCourseDisplay(const QString &courseCode)
 
 
         QStringList courses = m_profDb->allCoursesForProfessor(p.professorInfo);
-        QString courseStr = courses.join(", ");
-        ui->profTable->setItem(i, 3, new QTableWidgetItem(courseStr));
+
+        QStringList formattedCourses;
+        for (const QString &code : courses)
+        {
+            CourseInfo ci = m_courseDb->courseByCode(code);
+
+            if (!ci.name.isEmpty())
+                formattedCourses << code + " – " + ci.name;
+            else
+                formattedCourses << code;
+        }
+
+        QString courseStr = formattedCourses.join("\n");
+
+        QTableWidgetItem *allCoursesItem = new QTableWidgetItem(courseStr);
+        allCoursesItem->setTextAlignment(Qt::AlignLeft | Qt::AlignTop);
+        ui->profTable->setItem(i, 3, allCoursesItem);
+        ui->profTable->resizeColumnToContents(3);
 
 
         if (i == 0)
             firstIsbn = p.isbn;
         ui->titleLabel->setText("Title: " + p.bookTitle);
         ui->authorLabel->setText("Author: " + p.author);
+        ui->profTable->setWordWrap(true);
+        ui->profTable->resizeRowsToContents();
+
 
 
         if (!p.summary.isEmpty()) {

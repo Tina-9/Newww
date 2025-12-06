@@ -14,7 +14,7 @@ public:
     bool signUp(const QString &username, const QString &password);
 
 private:
-    QString m_filePath;   // users.txt
+    QString m_filePath;
 };
 
 #endif

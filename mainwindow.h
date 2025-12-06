@@ -20,6 +20,7 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+
 private slots:
     void onMajorChanged(const QString &major);
     void onYearChanged(const QString &year);

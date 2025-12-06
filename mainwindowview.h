@@ -15,6 +15,7 @@ class MainWindowView : public QWidget
 public:
     explicit MainWindowView(QWidget *parent = nullptr);
 
+
     QPushButton *btnLogin;
     QPushButton *btnSignUp;
     QPushButton *btnLogout;

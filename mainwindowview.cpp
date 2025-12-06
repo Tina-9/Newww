@@ -17,12 +17,14 @@
 MainWindowView::MainWindowView(QWidget *parent)
     : QWidget(parent)
 {
-    qDebug() << "BG exists?" << QFile::exists("data/images/background.png");
-
     setStyleSheet(
-        "MainWindowView {"
-        "  background-color: #FFCCCC;"
-        "}"
+        "background: qradialgradient("
+        "    cx:0.5, cy:0.3, radius:0.85,"
+        "    fx:0.5, fy:0.3,"
+        "    stop:0   #FFFDEB,"
+        "    stop:0.5 #FFE7B8,"
+        "    stop:1   #FFCFA5"
+        ");"
         );
 
 
@@ -41,19 +43,42 @@ MainWindowView::MainWindowView(QWidget *parent)
 
     isbnInput = new QLineEdit;
     isbnInput->setPlaceholderText("Type ISBN and press Enter...");
+    isbnInput->setStyleSheet(
+        "QLineEdit {"
+        "   background: #FFF9E8;"
+        "   border: 2px solid #F6D78E;"
+        "   border-radius: 8px;"
+        "   padding: 4px 8px;"
+        "   color: #6B4E2E;"
+        "}"
+        );
 
     majorBox  = new QComboBox;
     yearBox   = new QComboBox;
     courseBox = new QComboBox;
 
     majorBox->addItem("Select Major");
+    majorBox->setStyleSheet(
+        "QComboBox {"
+        "   background: #FFF9E8;"
+        "   border: 2px solid #F6D78E;"
+        "   border-radius: 8px;"
+        "   padding: 4px 8px;"
+        "   color: #6B4E2E;"
+        "}"
+        );
     yearBox->addItem("Select Year");
-    courseBox->addItem("Select Course");
+    yearBox->setStyleSheet(majorBox->styleSheet());
 
+    courseBox->addItem("Select Course");
+    courseBox->setStyleSheet(majorBox->styleSheet());
 
     QFrame *leftPanel = new QFrame;
-    leftPanel->setStyleSheet("border: 2px solid #CFAE3D; border-radius: 6px;");
-
+    leftPanel->setStyleSheet(
+        "background: rgba(255,255,255,0.86);"
+        "border: 2px solid #F6D78E;"
+        "border-radius: 12px;"
+        );
 
     auto *leftLayout = new QVBoxLayout;
     leftPanel->setLayout(leftLayout);
@@ -61,6 +86,7 @@ MainWindowView::MainWindowView(QWidget *parent)
     leftLayout->addLayout(topBtnLayout);
     leftLayout->addSpacing(250);
     leftLayout->addWidget(isbnInput);
+
     leftLayout->addSpacing(10);
     leftLayout->addWidget(majorBox);
     leftLayout->addSpacing(10);
@@ -84,6 +110,11 @@ MainWindowView::MainWindowView(QWidget *parent)
 
     auto *courseHeaderLayout = new QHBoxLayout;
     courseHeaderLayout->addWidget(courseLabel);
+    courseLabel->setStyleSheet("color: #6B4E2E;");
+    isbnLabel->setStyleSheet("color: #6B4E2E;");
+    titleLabel->setStyleSheet("color: #6B4E2E;");
+    authorLabel->setStyleSheet("color: #6B4E2E;");
+
     courseHeaderLayout->addStretch();
     courseHeaderLayout->addWidget(isbnLabel);
 
@@ -97,14 +128,41 @@ MainWindowView::MainWindowView(QWidget *parent)
     coverLabel = new QLabel("No Cover");
     coverLabel->setFixedSize(350, 220);
     coverLabel->setAlignment(Qt::AlignCenter);
-    coverLabel->setStyleSheet("background:white; border:1px solid #CFAE3D;");
+    coverLabel->setStyleSheet(
+        "background: #FFFFFF;"
+        "border: 2px solid #F6D78E;"
+        "border-radius: 8px;"
+        );
 
     auto *coverLayout = new QHBoxLayout;
     coverLayout->addWidget(coverLabel);
     coverLayout->addLayout(bookInfoLayout);
 
     // table
+
+
+
     profTable = new QTableWidget;
+
+    profTable->setStyleSheet(
+        "QHeaderView::section {"
+        "    background: #FFE7B8;"
+        "    color: #6B4E2E;"
+        "    border: 1px solid #F6D78E;"
+        "    font-weight: bold;"
+        "}"
+        "QTableWidget {"
+        "    background: rgba(255,255,255,0.85);"
+        "    border: 2px solid #F6D78E;"
+        "    border-radius: 8px;"
+        "    gridline-color: #F6D78E;"
+        "}"
+        "QTableWidget::item:selected {"
+        "    background: #FFF4C9;"
+        "    color: #6B4E2E;"
+        "}"
+        );
+
     profTable->setColumnCount(4);
     profTable->verticalHeader()->setFixedWidth(25);
     profTable->verticalHeader()->setDefaultAlignment(Qt::AlignCenter);
@@ -124,13 +182,25 @@ MainWindowView::MainWindowView(QWidget *parent)
 
     // Summary
     summaryEdit = new QTextEdit;
-
+    summaryEdit->setStyleSheet(
+        "QTextEdit {"
+        "   background: #FFFDF3;"
+        "   border: 2px solid #F6D78E;"
+        "   border-radius: 10px;"
+        "   padding: 8px;"
+        "   color: #6B4E2E;"
+        "}"
+        );
     summaryEdit->setPlaceholderText("Summary about this course, professors, and books...");
     summaryEdit->setReadOnly(true);
 
     auto *rightLayout = new QVBoxLayout;
     QFrame *rightPanel = new QFrame;
-    rightPanel->setStyleSheet("border: 2px solid #CFAE3D; border-radius: 6px;");
+    rightPanel->setStyleSheet(
+        "background: rgba(255,255,255,0.80);"
+        "border: 2px solid #F6D78E;"
+        "border-radius: 12px;"
+        );
     rightPanel->setLayout(rightLayout);
 
     rightLayout->addLayout(courseHeaderLayout);

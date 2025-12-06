@@ -27,9 +27,7 @@ public:
     CourseInfo courseByCode(const QString &code) const;
 
 private:
-    // key: courseCode
     QMap<QString, CourseInfo> m_courses;
 };
 
 #endif
-// COURSEDATABASE_H

@@ -14,7 +14,6 @@
 MainWindowView::MainWindowView(QWidget *parent)
     : QWidget(parent)
 {
-    // 整体背景渐变（和你图片很像）
     setStyleSheet(
         "MainWindowView {"
         "  background: qlineargradient("
@@ -24,7 +23,7 @@ MainWindowView::MainWindowView(QWidget *parent)
         "}"
         );
 
-    // ========= 顶部按钮 =========
+    // top button
     btnLogin  = new QPushButton("Login");
     btnSignUp = new QPushButton("Sign Up");
     btnLogout = new QPushButton("Logout");
@@ -35,8 +34,7 @@ MainWindowView::MainWindowView(QWidget *parent)
     topBtnLayout->addWidget(btnSignUp);
     topBtnLayout->addWidget(btnLogout);
 
-    // ========= 左侧区域 =========
-
+    // Left
 
     isbnInput = new QLineEdit;
     isbnInput->setPlaceholderText("Type ISBN and press Enter...");
@@ -69,7 +67,7 @@ MainWindowView::MainWindowView(QWidget *parent)
     leftLayout->addWidget(courseBox);
     leftLayout->addStretch();
 
-    // ========= 右侧顶部：课程 + 封面 + ISBN 显示 =========
+    // right top: course + cover + ISBN
 
     courseLabel = new QLabel("Course: ");
     QFont f = courseLabel->font();
@@ -103,7 +101,7 @@ MainWindowView::MainWindowView(QWidget *parent)
     coverLayout->addWidget(coverLabel);
     coverLayout->addLayout(bookInfoLayout);
 
-    // ========= 表格 =========
+    // table
     profTable = new QTableWidget;
     profTable->setColumnCount(4);
     profTable->verticalHeader()->setFixedWidth(25);
@@ -122,8 +120,9 @@ MainWindowView::MainWindowView(QWidget *parent)
     profTable->setSelectionBehavior(QAbstractItemView::SelectRows);
 
 
-    // ========= Summary =========
+    // Summary
     summaryEdit = new QTextEdit;
+
     summaryEdit->setPlaceholderText("Summary about this course, professors, and books...");
     summaryEdit->setReadOnly(true);
 
@@ -137,7 +136,7 @@ MainWindowView::MainWindowView(QWidget *parent)
     rightLayout->addWidget(profTable, 3);
     rightLayout->addWidget(summaryEdit, 2);
 
-    // ========= 主布局 =========
+    // main layout
     auto *mainLayout = new QHBoxLayout;
     mainLayout->addWidget(leftPanel, 1);
     mainLayout->addWidget(rightPanel, 3);

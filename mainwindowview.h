@@ -37,4 +37,3 @@ public:
 };
 
 #endif
-// MAINWINDOWVIEW_H

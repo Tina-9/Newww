@@ -38,4 +38,3 @@ private:
 };
 
 #endif
-// PROFESSORDATABASE_H

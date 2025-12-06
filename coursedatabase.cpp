@@ -26,7 +26,7 @@ bool CourseDatabase::loadFromCsv(const QString &filePath)
 
     QTextStream in(&file);
     if (!in.atEnd())
-        in.readLine(); // skip header
+        in.readLine();
 
     while (!in.atEnd())
     {

@@ -28,4 +28,4 @@ private:
     QPushButton *btnSignUp;
 };
 
-#endif // LOGINDIALOG_H
+#endif

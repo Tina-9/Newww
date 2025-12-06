@@ -90,6 +90,7 @@ void MainWindow::setLoggedIn(bool loggedIn)
 
 void MainWindow::onMajorChanged(const QString &major)
 {
+    ui->isbnInput->clear();
     if (major == "Select Major")
     {
         ui->yearBox->clear();
@@ -110,6 +111,7 @@ void MainWindow::onMajorChanged(const QString &major)
 
 void MainWindow::onYearChanged(const QString &year)
 {
+    ui->isbnInput->clear();
     const QString major = ui->majorBox->currentText();
     if (year == "Select Year" || major == "Select Major")
     {
@@ -121,8 +123,7 @@ void MainWindow::onYearChanged(const QString &year)
     ui->courseBox->clear();
     ui->courseBox->addItem("Select Course");
 
-    const QStringList courses =
-        m_courseDb->coursesForMajorYear(major, year);
+    const QStringList courses = m_courseDb->coursesForMajorYear(major, year);
 
     for (const QString &code : courses)
         ui->courseBox->addItem(code);
@@ -130,6 +131,7 @@ void MainWindow::onYearChanged(const QString &year)
 
 void MainWindow::onCourseChanged(const QString &courseCode)
 {
+    ui->isbnInput->clear();
     if (courseCode == "Select Course")
         return;
 
@@ -145,6 +147,12 @@ void MainWindow::updateCourseDisplay(const QString &courseCode)
 
     ui->courseLabel->setText("Course: " + cinfo.code + " - " + cinfo.name);
 
+
+    ui->coverLabel->setPixmap(QPixmap());
+    ui->coverLabel->setText("No Cover");
+    ui->isbnLabel->setText("ISBN: ");
+    ui->titleLabel->setText("Title: ");
+    ui->authorLabel->setText("Author: ");
 
     QVector<ProfessorInfo> profs = m_profDb->professorsForCourse(courseCode);
     m_currentProfList = profs;
@@ -167,7 +175,6 @@ void MainWindow::updateCourseDisplay(const QString &courseCode)
 
 
         QStringList courses = m_profDb->allCoursesForProfessor(p.professorInfo);
-
         QString courseStr = courses.join(", ");
         ui->profTable->setItem(i, 3, new QTableWidgetItem(courseStr));
 
@@ -179,8 +186,14 @@ void MainWindow::updateCourseDisplay(const QString &courseCode)
 
 
         if (!p.summary.isEmpty()) {
-            summaryText += p.professorInfo + ":\n";
-            summaryText += p.summary + "\n\n";
+            QString cleanProf = p.professorInfo;
+            cleanProf.remove('"');
+
+            QString cleanSummary = p.summary;
+            cleanSummary.remove('"');
+
+            summaryText += cleanProf + ":\n";
+            summaryText += cleanSummary + "\n\n";
         }
     }
 

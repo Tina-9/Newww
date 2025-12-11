@@ -366,6 +366,12 @@
 	"HEADERS" : 
 	[
 		[
+			"/Users/NYC_Life/Newww/authbase.h",
+			"MU",
+			"EWIEGA46WW/moc_authbase.cpp",
+			null
+		],
+		[
 			"/Users/NYC_Life/Newww/coursedatabase.h",
 			"MU",
 			"EWIEGA46WW/moc_coursedatabase.cpp",

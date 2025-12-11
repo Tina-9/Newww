@@ -1,6 +1,6 @@
 #include "professordatabase.h"
-#include <QFile>
-#include <QTextStream>
+#include <QFile>       // These headers enable file I/O.
+#include <QTextStream> // This no file output in this file. only file input(same as the coursedatabase.cpp)
 
 ProfessorDatabase::ProfessorDatabase(QObject *parent)
     : QObject(parent)
@@ -9,25 +9,28 @@ ProfessorDatabase::ProfessorDatabase(QObject *parent)
 
 bool ProfessorDatabase::loadFromCsv(const QString &filePath)
 {
+    // This is where the program opens the CSV file for reading.
+    // 13-15 This is the file input setup. The CSV file is opened for reading using QFile
     QFile file(filePath);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
         return false;
 
-    QTextStream in(&file);
-    m_professors.clear();
+    QTextStream in(&file);  //18-19
+    m_professors.clear(); // QTextStream is used to read the file line-by-line.
 
     bool firstLine = true;
-    while (!in.atEnd()) {
-        QString line = in.readLine().trimmed();
-        if (line.isEmpty()) continue;
 
+    while (!in.atEnd()) {
+        QString line = in.readLine().trimmed();  // 23-25 Reads each line of the CSV.
+        if (line.isEmpty()) continue;
         if (firstLine) { firstLine = false; continue; }
 
-        QStringList parts = line.split(',');
+        QStringList parts = line.split(',');  // 27-29:Parses each CSV row into fields.
 
         if (parts.size() < 8) continue;
 
-        ProfessorInfo p;
+        ProfessorInfo p;                  // Then entire block
+                                         // This uses the CSV data, No output is written here,only reading.
         p.major         = parts[0];
         p.year          = parts[1];
         p.courseCode    = parts[2];

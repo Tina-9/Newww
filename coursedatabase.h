@@ -30,4 +30,5 @@ private:
     QMap<QString, CourseInfo> m_courses;
 };
 
+
 #endif

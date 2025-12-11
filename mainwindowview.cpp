@@ -21,12 +21,11 @@ MainWindowView::MainWindowView(QWidget *parent)
         "background: qradialgradient("
         "    cx:0.5, cy:0.3, radius:0.85,"
         "    fx:0.5, fy:0.3,"
-        "    stop:0   #FFFDEB,"
+        "    stop:0   #FFFDEB"
         "    stop:0.5 #FFE7B8,"
         "    stop:1   #FFCFA5"
         ");"
         );
-
 
     // top button
     btnLogin  = new QPushButton("Login");
@@ -40,7 +39,6 @@ MainWindowView::MainWindowView(QWidget *parent)
     topBtnLayout->addWidget(btnLogout);
 
     // Left
-
     isbnInput = new QLineEdit;
     isbnInput->setPlaceholderText("Type ISBN and press Enter...");
     isbnInput->setStyleSheet(
@@ -96,7 +94,6 @@ MainWindowView::MainWindowView(QWidget *parent)
     leftLayout->addStretch();
 
     // right top: course + cover + ISBN
-
     courseLabel = new QLabel("Course: ");
     QFont f = courseLabel->font();
     f.setPointSize(16);
@@ -118,8 +115,6 @@ MainWindowView::MainWindowView(QWidget *parent)
     courseHeaderLayout->addStretch();
     courseHeaderLayout->addWidget(isbnLabel);
 
-
-
     QVBoxLayout *bookInfoLayout = new QVBoxLayout;
     bookInfoLayout->addWidget(titleLabel);
     bookInfoLayout->addWidget(authorLabel);
@@ -139,9 +134,6 @@ MainWindowView::MainWindowView(QWidget *parent)
     coverLayout->addLayout(bookInfoLayout);
 
     // table
-
-
-
     profTable = new QTableWidget;
 
     profTable->setStyleSheet(
@@ -178,7 +170,6 @@ MainWindowView::MainWindowView(QWidget *parent)
     profTable->horizontalHeader()->setStretchLastSection(false);
     profTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
     profTable->setSelectionBehavior(QAbstractItemView::SelectRows);
-
 
     // Summary
     summaryEdit = new QTextEdit;

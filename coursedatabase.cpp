@@ -3,6 +3,9 @@
 #include <QFile>
 #include <QTextStream>
 #include <QSet>
+#include <QDebug>
+#include <stdexcept>
+
 
 CourseDatabase::CourseDatabase(QObject *parent)
     : QObject(parent)
@@ -21,32 +24,45 @@ static QString clean(QString s)
 bool CourseDatabase::loadFromCsv(const QString &filePath)
 {
     QFile file(filePath);
-    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
-        return false;
 
-    QTextStream in(&file);
-    if (!in.atEnd())
-        in.readLine();
-
-    while (!in.atEnd())
+    try
     {
-        const QString line = in.readLine().trimmed();
-        if (line.isEmpty()) continue;
+        if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+            throw std::runtime_error("Failed to open course database file");
 
-        const QStringList p = line.split(',');
-        if (p.size() < 4) continue;
+        QTextStream in(&file);
 
-        CourseInfo info;
-        info.major = clean(p[0]);
-        info.year  = clean(p[1]);
-        info.code  = clean(p[2]);
-        info.name  = clean(p[3]);
+        if (!in.atEnd())
+            in.readLine(); // skip header
 
+        while (!in.atEnd())
+        {
+            QString line = in.readLine().trimmed();
+            if (line.isEmpty()) continue;
 
-        m_courses[info.code] = info;
+            QStringList p = line.split(',');
+            if (p.size() < 4)
+                throw std::runtime_error("Malformed CSV record in course database");
+
+            CourseInfo info;
+            info.major = clean(p[0]);
+            info.year  = clean(p[1]);
+            info.code  = clean(p[2]);
+            info.name  = clean(p[3]);
+
+            m_courses[info.code] = info;
+        }
     }
+    catch (const std::exception &e)
+    {
+        qDebug() << "Error loading course CSV:" << e.what();
+        return false;
+    }
+
     return true;
 }
+
+
 
 QStringList CourseDatabase::majors() const
 {

@@ -718,6 +718,7 @@
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include/__stdarg_va_list.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include/limits.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include/stdarg.h \
+  /Users/NYC_Life/Newww/authbase.h \
   /Users/NYC_Life/Qt/6.5.11/macos/lib/QtCore.framework/Versions/A/Headers/QObject \
   /Users/NYC_Life/Qt/6.5.11/macos/lib/QtCore.framework/Versions/A/Headers/QString \
   /Users/NYC_Life/Qt/6.5.11/macos/lib/QtCore.framework/Versions/A/Headers/q20type_traits.h \
